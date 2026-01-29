@@ -1,7 +1,7 @@
-#include "io.h"
-#include "uiFormat.h"
-#include "tramManager.h"
-#include "monCalc.h"
+#include "io.hpp"
+#include "uiFormat.hpp"
+#include "tramManager.hpp"
+#include "monCalc.hpp"
 
 #include <iostream>
 #include <string>

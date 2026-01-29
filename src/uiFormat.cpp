@@ -1,5 +1,5 @@
-#include "uiFormat.h"
-#include "monCalc.h"
+#include "uiFormat.hpp"
+#include "monCalc.hpp"
 
 #include <iostream>
 #include <vector>

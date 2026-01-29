@@ -1,5 +1,5 @@
-#include "io.h"
-#include "uiFormat.h"
+#include "io.hpp"
+#include "uiFormat.hpp"
 #include <iostream>
 
 using namespace std;
