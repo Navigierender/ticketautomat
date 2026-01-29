@@ -6,7 +6,7 @@ using namespace std;
 
 struct TramLine {
     int tram_number;
-    float price_per_station;
+    int price_per_station;
     vector<string> stations;
 };
 

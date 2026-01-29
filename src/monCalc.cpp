@@ -6,7 +6,7 @@
 using namespace std;
 
 //converts cents to change struct
-change MoneyCalc::intToChange(int cents) {
+change MoneyCalc::intToChange(int value) {
     change result = {0};
 
     result.fiveH_e = cents/50000; cents %= 50000;
@@ -28,15 +28,7 @@ change MoneyCalc::intToChange(int cents) {
     return result;
 }
 
-string MoneyCalc::formatPrice(float price) {
-    int cents = static_cast<int>(round(price * 100));
-    int euros = cents / 100;
-    int cent_part = cents % 100;
-
-    return to_string(euros) + "." + (cent_part < 10 ? "0" : "") + to_string(cent_part);
-}
-
-change MoneyCalc::calcChange(float paid, float price) {
+change MoneyCalc::calcChange(int paid, int price, change reservoir) {
     int paid_cents  = static_cast<int>(round(paid * 100.0f));
     int price_cents = static_cast<int>(round(price * 100.0f));
 
@@ -44,5 +36,3 @@ change MoneyCalc::calcChange(float paid, float price) {
 
     return intToChange(diff_cents);
 }
-
-

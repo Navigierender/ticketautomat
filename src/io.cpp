@@ -28,14 +28,14 @@ int Io::valInRange(string msg, string wrng_msg, int range_start, int range_end) 
     }
 }
 
-float Io::valAbove(string msg, string wrng_msg, float goal) {
+int Io::valUnder_oZERO(string msg, string wrng_msg, int goal) {
     float input;
 
     while (true) {
         cout << msg << ": ";
         cin >> input;
 
-        if (input >= goal) return input;
+        if (input >= goal || input == 0) return input;
 
         cout << format.RED << wrng_msg << format.RESET << format::up(1) << format.clear_line;
     }
