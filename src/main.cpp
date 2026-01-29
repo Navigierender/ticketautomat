@@ -58,9 +58,9 @@ int main()
                 break;
             }
         }
-        if (Io::askToQuit()) {
-            break;
-        }
+        
+        cout << SEP << Ui::drawBox("Programm beenden?", {"(0) Beenden", "(1) Weiter"}, 42);
+        if (Io::valInRange("Eingabe", "Ungültige Eingabe", 0, 1) == 0) break;
     }
 
     return 0;

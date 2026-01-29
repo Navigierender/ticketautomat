@@ -71,6 +71,7 @@ vector<string> Ui::changeToVec(change money) {
         }
     };
 
+    addIfVal("17: ",  money.seventeen);
     addIfVal("11: ",  money.eleven);
     addIfVal("7: ",   money.seven);
     addIfVal("5: ",   money.five);

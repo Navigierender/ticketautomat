@@ -27,7 +27,28 @@ inline format format;
 
 class Ui {
 public:
+
+    /**
+     * @brief creates a string by repeating a UTF-8 input multiple times
+     * @param count how many times to repeat
+     * @param input the string or character to repeat
+     * @return the concatenated result string
+    **/
     static string repeatUTF8string(int count, string input);
+
+    /**
+     * @brief draws an ASCII box with a centered title and message lines
+     * @param title text displayed in the top border
+     * @param msg vector of strings to be displayed inside the box
+     * @param min_width minimum width of the box
+     * @return formatted string containing the full ASCII box
+    **/
     static string drawBox(string title, vector<string> msg, int min_width);
+
+    /**
+     * @brief converts a change struct into a printable vector of strings
+     * @param money the change struct to be converted
+     * @return vector containing labels and counts for coins > 0
+    **/
     static vector<string> changeToVec(change money);
 };
