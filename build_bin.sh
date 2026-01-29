@@ -1,1 +1,0 @@
-clang++ -Wall -std=c++17 -I./src src/*.cpp -o build/tam
