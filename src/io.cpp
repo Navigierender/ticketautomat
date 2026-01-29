@@ -40,3 +40,9 @@ int Io::valUnder_oZERO(string msg, string wrng_msg, int goal) {
         cout << format.RED << wrng_msg << format.RESET << format::up(1) << format.clear_line;
     }
 }
+
+bool Io::askToQuit() {
+    cout << Ui::drawBox("Programm beenden?", {"(0) Beenden", "(1) Weiter"}, 42);
+    int input = Io::valInRange("Eingabe", "Ungültige Eingabe", 0, 1);
+    return (input == 0);
+}

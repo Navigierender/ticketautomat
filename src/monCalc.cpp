@@ -5,34 +5,44 @@
 
 using namespace std;
 
+bool MoneyCalc::canReturnChange(int value, change reservoir) {
+    change needed = intToChange(value);
+
+    if (reservoir.eleven < needed.eleven) return false;
+    if (reservoir.seven < needed.seven) return false;
+    if (reservoir.five < needed.five) return false;
+    if (reservoir.three < needed.three) return false;
+    if (reservoir.two < needed.two) return false;
+    if (reservoir.one < needed.one) return false;
+
+    return true;
+}
+
 //converts cents to change struct
 change MoneyCalc::intToChange(int value) {
-    change result = {0};
+    change result = {0,0,0,0,0,0}; // Initialize all members to 0
+    int cents = value;
 
-    result.fiveH_e = cents/50000; cents %= 50000;
-    result.twoH_e = cents/20000; cents %= 20000;
-    result.oneH_e = cents/10000; cents %= 10000;
-    result.fifty_e = cents/5000; cents %= 5000;
-    result.twenty_e = cents/2000; cents %= 2000;
-    result.ten_e = cents/1000; cents %= 1000;
-    result.five_e = cents/500; cents %= 500;
-    result.two_e = cents/200; cents %= 200;
-    result.one_e = cents/100; cents %= 100;
-    result.fifty_c = cents/50; cents %= 50;
-    result.twenty_c = cents/20; cents %= 20;
-    result.ten_c = cents/10; cents %= 10;
-    result.five_c = cents/5; cents %= 5;
-    result.two_c = cents/2; cents %= 2;
-    result.one_c = cents;
+    result.eleven = cents / 11; cents %= 11;
+    result.seven = cents / 7; cents %= 7;
+    result.five = cents / 5; cents %= 5;
+    result.three = cents / 3; cents %= 3;
+    result.two = cents / 2; cents %= 2;
+    result.one = cents;
 
     return result;
 }
 
-change MoneyCalc::calcChange(int paid, int price, change reservoir) {
-    int paid_cents  = static_cast<int>(round(paid * 100.0f));
-    int price_cents = static_cast<int>(round(price * 100.0f));
+change MoneyCalc::calcChange(int paid, int price, change& reservoir) {
+    int diff = paid - price;
+    change change_to_return = intToChange(diff);
 
-    int diff_cents = paid_cents - price_cents;
+    reservoir.eleven -= change_to_return.eleven;
+    reservoir.seven -= change_to_return.seven;
+    reservoir.five -= change_to_return.five;
+    reservoir.three -= change_to_return.three;
+    reservoir.two -= change_to_return.two;
+    reservoir.one -= change_to_return.one;
 
-    return intToChange(diff_cents);
+    return change_to_return;
 }

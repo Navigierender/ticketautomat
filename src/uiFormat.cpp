@@ -71,21 +71,12 @@ vector<string> Ui::changeToVec(change money) {
         }
     };
 
-    addIfVal("500€: ", money.fiveH_e);
-    addIfVal("200€: ", money.twoH_e);
-    addIfVal("100€: ", money.oneH_e);
-    addIfVal("50€: ",  money.fifty_e);
-    addIfVal("20€: ",  money.twenty_e);
-    addIfVal("10€: ",  money.ten_e);
-    addIfVal("5€: ",   money.five_e);
-    addIfVal("2€: ",   money.two_e);
-    addIfVal("1€: ",   money.one_e);
-    addIfVal("50c: ",  money.fifty_c);
-    addIfVal("20c: ",  money.twenty_c);
-    addIfVal("10c: ",  money.ten_c);
-    addIfVal("5c: ",   money.five_c);
-    addIfVal("2c: ",   money.two_c);
-    addIfVal("1c: ",   money.one_c);
+    addIfVal("11: ",  money.eleven);
+    addIfVal("7: ",   money.seven);
+    addIfVal("5: ",   money.five);
+    addIfVal("3: ",   money.three);
+    addIfVal("2: ",   money.two);
+    addIfVal("1: ",   money.one);
 
     return result;
 }

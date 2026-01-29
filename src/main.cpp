@@ -53,10 +53,13 @@ int main()
             cout << SEP << Ui::drawBox("Reiseinfo", {"Linie: " + to_string(c_route.tram_ptr->tram_number),"Start: " + c_route.start_station,"Ziel: " + c_route.end_station,"Preis: " + to_string(c_route.price_direct),Ui::repeatUTF8string(MINWIDTH-2,"-"),"zum abbrechen '0' eingeben"}, MINWIDTH);
             int money_input = Io::valUnder_oZERO("Belibiege Geld Eingabe", "Eingabe zu gering", c_route.price_direct);
             if (MoneyCalc::canReturnChange(money_input,money_reservoir) || money_input == 0) {
-                change money_output = MoneyCalc::calcChange(money_input,c_route.price_direct,money_reservoir*);
+                change money_output = MoneyCalc::calcChange(money_input,c_route.price_direct,money_reservoir);
                 cout << SEP << Ui::drawBox("Rückgeld", Ui::changeToVec(money_output), MINWIDTH);
                 break;
             }
+        }
+        if (Io::askToQuit()) {
+            break;
         }
     }
 
