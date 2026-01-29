@@ -1,4 +1,4 @@
-#include "tramManager.hpp"
+#include "tramManager.h"
 
 #include <fstream>
 #include <filesystem>
@@ -12,7 +12,7 @@ vector<TramLine> TramManager::loadTrams(string data_dir) {
     vector<TramLine> all_trams;
 
     if (!filesystem::exists(data_dir)) return all_trams;
-    for (const filesystem::directory_entry entry : filesystem::directory_iterator(data_dir)) {
+    for (const filesystem::directory_entry& entry : filesystem::directory_iterator(data_dir)) {
         if (entry.is_regular_file() && entry.path().extension() == ".tram") {
             ifstream file(entry.path());
             if (!file.is_open()) continue;

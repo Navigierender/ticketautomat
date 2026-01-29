@@ -1,7 +1,7 @@
-#include "io.hpp"
-#include "uiFormat.hpp"
-#include "tramManager.hpp"
-#include "monCalc.hpp"
+#include "io.h"
+#include "uiFormat.h"
+#include "tramManager.h"
+#include "monCalc.h"
 
 #include <iostream>
 #include <string>
@@ -23,7 +23,7 @@ int main()
     const string SEPERATION = Ui::repeatUTF8string(3,"\n");
     route c_route;
 
-    vector<TramLine> tram_lines = TramManager::loadTrams("C:/Users/Jaros/OneDrive/Studium/Module/GdP/Abschlussarbeit/21_ticketautomat/sftw_1/tram_data");
+    vector<TramLine> tram_lines = TramManager::loadTrams("tram_data");
     vector<string> tram_num_strs;
     for (TramLine& t : tram_lines) { tram_num_strs.push_back(to_string(t.tram_number)); }
 

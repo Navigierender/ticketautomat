@@ -1,6 +1,7 @@
-#include "monCalc.hpp"
+#include "monCalc.h"
 
 #include <cmath>
+#include <string>
 
 using namespace std;
 
@@ -27,7 +28,7 @@ change MoneyCalc::intToChange(int cents) {
     return result;
 }
 
-string MoneyCalc::formatPrice(int price) {
+string MoneyCalc::formatPrice(float price) {
     int cents = static_cast<int>(round(price * 100));
     int euros = cents / 100;
     int cent_part = cents % 100;
