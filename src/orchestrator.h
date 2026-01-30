@@ -3,7 +3,6 @@
 
 #include "tramUtil.h"
 #include "uiUtil.h"
-#include "ioUtil.h"
 #include "moneyUtil.h"
 #include "tramUtil.h"
 
@@ -17,11 +16,11 @@ namespace Orst {
 
     vector<string> reqStationsSelect(const tramLine* tramline_ptr, int width);
 
-    const int fetchRoutePrice(sel_route.tram_ptr, sel_route.stations);
+    int fetchRoutePrice(const tramLine* tram_ptr, const vector<string>& stations);
 
-    const bool reqContinue(string msg);
+    bool reqContinue(string msg);
 
-    const void finalizeOrSkip(route sel_route, string msg_tram_number, string msg_price, string msg_quit);
+    void finalizeOrSkip(const route& sel_route, string msg_tram_number, string msg_price, string msg_quit);
 };
 
 #endif

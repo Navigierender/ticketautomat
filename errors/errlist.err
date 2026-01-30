@@ -1,3 +1,11 @@
 errors 1-100 are reserved for internal errorHandler errors
 
-101§Could not load 'tram_data'
+101-200 Tram-Util errors:
+
+*101§could not load 'tram_data'
+*102§could not open specific tram file
+*103§tried to read corrupted tram file (invalid format)
+*104§no valid tram lines could be loaded
+
+201-300 Ui-Util errors:
+
