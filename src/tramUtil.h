@@ -28,6 +28,11 @@ namespace TramUtil {
      */
     const vector<tramLine> loadTrams(string data_dir);
 
+    /**
+     * @brief Extracts tram numbers (IDs) from a vector of tram lines
+     * @param tram_lines Pointer to a vector of tramLine objects
+     * @return A vector of integer tram IDs
+     */
     const vector<int> getTramINTs(const vector<tramLine>* tram_lines);
 };
 

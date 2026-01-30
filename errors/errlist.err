@@ -1,5 +1,7 @@
 errors 1-100 are reserved for internal errorHandler errors
 
+*100§This is not a windows software, so it wasnt loaded
+
 101-200 Tram-Util errors:
 
 *101§could not load 'tram_data'

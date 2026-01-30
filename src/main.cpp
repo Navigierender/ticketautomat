@@ -16,6 +16,10 @@ const vector<int> ALL_TRAMN_IDS = TramUtil::getTramINTs(ALL_TRAMS*);
 
 change money_reservoir = {2,2,2,2,2,2};
 
+/**
+ * @brief Main entry point of the Ticketautomat application
+ * @return Exit code 0 on successful execution
+ */
 int main() {
     #ifdef _WIN32
         ErrLogger::stopAndLog(101,false); //error 101 - wrong os
