@@ -1,19 +1,19 @@
 #include "orchestrator.h"
-#include "UiUtils.h"
-#include "ioUtils.h"
-#include "tramManag.h"
+#include "tramUtil.h"
+#include "errorHandler.h"
 
-#include <iostream>
 #include <string>
 #include <vector>
 
 using namespace std;
 
-const int MINDWIDTH = 42;
-const string SEP = UI::repeatUTF8string(3,"\n");
+ErrLogger::initErrList("errors");
 
-const vector<tramLine> ALL_TRAMS= TramManag::loadTrams("tram_data");
-const vector<int> ALL_TRAMN_IDS = TramManag::getTramINTs(ALL_TRAMS);
+const int MINWIDTH = 42;
+const string SEP = UiUtil::repeatUTF8string(3,"\n");
+
+const vector<tramLine> ALL_TRAMS= TramUtil::loadTrams("tram_data");
+const vector<int> ALL_TRAMN_IDS = TramUtil::getTramINTs(ALL_TRAMS);
 
 change money_reservoir = {2,2,2,2,2,2};
 
@@ -22,12 +22,15 @@ int main() {
 
     //main loop
     while (true) {
-        UI::resetUIaClean();
+        Ui::resetUIaClean();
 
-        sel_route.tram_ptr = Orst::reqTramSelec(ALL_TRAMS, ALL_TRAMN_IDS, MINWIDTH);
-        sel_route.stations = Orst::reqTramStationsSelec(sel_route.tram_ptr, MINDWIDTH);
+        if (Orst::reqContinue() == false) break;
 
+        sel_route.tram_ptr = Orst::reqTramSelec(ALL_TRAMS, ALL_TRAMN_IDS, "Bahnauswahl", MINWIDTH);
+        sel_route.stations = Orst::reqStationsSelect(sel_route.tram_ptr, MINWIDTH);
+        sel_route.price = Orst::fetchRoutePrice(sel_route.tram_ptr, sel_route.stations);
 
+        Orst::finalizeOrSkip(sel_route, "Linie", "Preis", "Zum Beenden");
     }
 
     return 0
