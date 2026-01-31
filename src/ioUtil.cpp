@@ -16,7 +16,7 @@ using namespace std;
 
 namespace IoUtil {
     void dependencyCheck() {
-        if (!UIHEADEREXISTS) ErrLogger::stopAndLog(400, false); //io Util error 400: could not load uiUtil dependecy in io-Util
+        if (!UIHEADEREXISTS) ErrLogger::stopAndLog(400, true); //io Util error 400: could not load uiUtil dependecy in io-Util
     }
 
     void clearConsole() {
@@ -36,7 +36,7 @@ namespace IoUtil {
 
     int valInStrict(string msg, string wrng_msg, vector<int> valid) {
         string input;
-        
+
         while (true) {
             cout << msg << ": ";
             getline(cin, input);

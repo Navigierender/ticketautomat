@@ -16,18 +16,32 @@ namespace Orst {
         UiUtil::dependencyCheck();
     }
 
-    const tramLine* reqTramSelect(const vector<tramLine>& all_trams, const vector<int>& valid_ids, string title, int width) {
+    const tramLine* reqTramSelect(const vector<tramLine>& all_trams, const vector<int>& valid_ids, string title, int min_width) {
         
-        cout << UiUtil::drawBox(title, UiUtil::convertIntVecToStr(valid_ids), width);
-        int choice = IoUtil::intValInStrict("Eingabe ID", "Ungültige ID!", valid_ids);
+        cout << UiUtil::drawBox(title, UiUtil::convertIntVecToStr(valid_ids), min_width);
+        int choice = IoUtil::intValInStrict("Eingabe", "Ungültige Bahn Nummer", valid_ids);
         return &TramUtil::getTram(all_trams, choice);
     }
 
-    vector<string> reqStationsSelect(const tramLine* tramline_ptr, int width) {};
+    vector<string> reqStationsSelect(string title_stdec0, string title_stdec1, const tramLine* tramline_ptr, int min_width) {
+        vector<string> tram_stations = tramline_ptr->stations;
+        vector<string> choice_stdec;
 
-    int fetchRoutePrice(const tramLine* tram_ptr, const vector<string>& stations) {};
+        cout << UiUtil::drawBox(title_stdec0, tram_stations,min_width);
+        choice_stdec.push_back(IoUtil::strValInStrict("Eingabe","Ungültige Eingabe",tram_stations));
 
-    bool reqContinue(string msg) {};
+        cout << UiUtil::drawBox(title_stdec1, tram_stations,min_width);
+        choice_stdec.push_back(IoUtil::strValInStrict("Eingabe","Ungültige Eingabe",tram_stations));
 
-    void finalizeOrSkip(const route& sel_route, string msg_tram_number, string msg_price, string msg_quit) {};
+        return choice_stdec;
+    }
+
+    int fetchRoutePrice(const tramLine* tram_ptr, const vector<string> stations) {
+        int station_distance = TramUtil::getStationDistance(tram_ptr, stations);
+        return station_distance * tram_ptr->station_price;
+    }
+
+    bool reqContinue(string msg) {}
+
+    void finalizeOrSkip(const route& sel_route, string msg_tram_number, string msg_price, string msg_quit) {}
 };

@@ -36,6 +36,8 @@ namespace TramUtil {
     const vector<int> getTramINTs(const vector<tramLine>* tram_lines);
 
     const tramLine& getTram(const std::vector<tramLine>& all_trams, int choice);
+
+    int getStationDistance(const tramLine* tram, vector<string> prov_stations);
 };
 
 #endif

@@ -21,7 +21,8 @@ namespace {
     string saved_dir = "";
 
     const vector<err_element> intern_errlist = {
-        err_element(1, "could not load extern error-sheet")
+        err_element(1, "could not load extern error-sheet"),
+        err_element(2, "external error-sheet contains invalid format or non-numeric ID")
     };
 
     string fetchError(int id, bool use_extern) {
@@ -49,30 +50,33 @@ namespace ErrLogger {
     void initErrList(string errorlist_dir) {
         saved_dir = errorlist_dir;
         ifstream file(errorlist_dir);
-        
         if (!file.is_open()) {
-            Log(1, false); 
+            stopAndLog(1, false);
             return;
         }
 
         string line;
         while (getline(file, line)) {
-            if (line.empty()) continue;
+            if (line.empty() || line[0] != '_') continue;
 
-            stringstream ss(line);
-            string id_str, description;
-
-            if (getline(ss, id_str, ':') && getline(ss, description)) {
-                // Wir fangen nur die spezifischen stoi-Fehler ab
-                try {
-                    int parsed_id = stoi(id_str);
-                    extern_errlist.push_back(err_element(parsed_id, description));
-                } catch (const invalid_argument&) {
-                    continue; 
-                } catch (const out_of_range&) {
-                    continue;
-                }
+            size_t hash_pos = line.find('#');
+            if (hash_pos == string::npos) {
+                stopAndLog(2, false);
+                return;
             }
+
+            string id_str = line.substr(1, hash_pos - 1);
+            string description = line.substr(hash_pos + 1);
+
+            bool is_num = !id_str.empty();
+            for(char c : id_str) if(!isdigit(c)) is_num = false;
+
+            if (!is_num) {
+                stopAndLog(2, false);
+                return;
+            }
+
+            extern_errlist.push_back(err_element(stoi(id_str), description));
         }
         file.close();
     }

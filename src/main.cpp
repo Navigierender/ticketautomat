@@ -19,7 +19,7 @@ change money_reservoir = {2,2,2,2,2,2};
 
 int main() {
     #ifdef _WIN32
-        ErrLogger::stopAndLog(600,false); //error 600 - wrong os
+        ErrLogger::stopAndLog(600,true); //error 600 - wrong os
     #endif
 
     ErrLogger::initErrList("errors/errlist.err"); //trys to initialize errorlist from errors directory
@@ -34,7 +34,7 @@ int main() {
         if (Orst::reqContinue("Automat schliessen?") == false) break;
 
         sel_route.tram_ptr = Orst::reqTramSelec(ALL_TRAMS, ALL_TRAMN_IDS, "Bahnauswahl", MINWIDTH);
-        sel_route.stations = Orst::reqStationsSelect(sel_route.tram_ptr, MINWIDTH);
+        sel_route.stations = Orst::reqStationsSelect("Startstation","Endstation", sel_route.tram_ptr, MINWIDTH);
         sel_route.price = Orst::fetchRoutePrice(sel_route.tram_ptr, sel_route.stations);
 
         Orst::finalizeOrSkip(sel_route, "Linie", "Preis", "Zum Beenden");

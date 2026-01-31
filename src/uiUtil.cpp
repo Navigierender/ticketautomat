@@ -48,7 +48,7 @@ int calcWidthFromVec(int min_width, vector<string> vec) {
 
 namespace UiUtil {
     void dependencyCheck() {
-        if (!IOHEADEREXISTS) ErrLogger::stopAndLog(300, false); //ui Util error 300: could not load ioUtil dependecy in ui-Util
+        if (!IOHEADEREXISTS) ErrLogger::stopAndLog(300, true); //ui Util error 300: could not load ioUtil dependecy in ui-Util
     }
 
     vector<string> convertIntVecToStr(const vector<int>& ints) {

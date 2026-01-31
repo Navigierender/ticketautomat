@@ -72,9 +72,23 @@ namespace TramUtil {
         size_t index = static_cast<size_t>(choice - 1);
         
         if (index >= all_trams.size()) {
-             // Your error handling here
+             //error still to be inserted
         }
         
         return all_trams[index];
+    }
+
+    int getStationDistance(const tramLine* tram, vector<string> prov_stations) {
+        int start_idx = -1;
+        int end_idx = -1;
+
+        for (int i = 0; i < (int)tram->stations.size(); i++) {
+            if (tram->stations[i] == prov_stations[0]) start_idx = i;
+            if (tram->stations[i] == prov_stations[1]) end_idx = i;
+        }
+
+        if (start_idx == -1 || end_idx == -1) ErrLogger::stopAndLog(104,true); 
+
+        return abs(start_idx - end_idx);
     }
 }

@@ -1,18 +1,17 @@
 errors 1-99 are reserved for internal errorHandler errors
 
-*100§This is not a windows software, so it wasnt loaded
-
 100-199 Tram-Util errors:
 
 _100#could not load 'tram_data'
 _101#could not open specific tram file
 _102#tried to read corrupted tram file (invalid format)
 _103#no valid tram lines could be loaded
+_104#station in "validated" stations vector could not be found in getStationDistance
 
 200-299 money-Util errors:
 
 300-399 ui-Util errors:
-_400#could not load ioUtil dependecy in ui-Util
+_300#could not load ioUtil dependecy in ui-Util
 
 400-499 io-Util errors:
 _400#could not load uiUtil dependecy in io-Util

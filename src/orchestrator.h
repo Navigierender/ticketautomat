@@ -22,7 +22,7 @@ namespace Orst {
      * @param width display width for the menu
      * @return Pointer to the selected tram line or nullptr if cancelled
      */
-    const tramLine* reqTramSelec(const vector<tramLine>& all_trams, const vector<int>& valid_ids, string title, int width);
+    const tramLine* reqTramSelec(const vector<tramLine>& all_trams, const vector<int>& valid_ids, string title, int min_width);
 
     /**
      * @brief Requests user to select start and end stations
@@ -30,7 +30,7 @@ namespace Orst {
      * @param width Display width for the station selection menu
      * @return Vector of selected station names (start and end)
      */
-    vector<string> reqStationsSelect(const tramLine* tramline_ptr, int width);
+    vector<string> reqStationsSelect(string title_stdec0, string title_stdec1, const tramLine* tramline_ptr, int min_width);
 
     /**
      * @brief Calculates the price for a given route
