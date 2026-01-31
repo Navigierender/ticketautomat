@@ -33,4 +33,23 @@ namespace IoUtil {
             cout << format::RED << wrng_msg << format::RESET << format::up(1) << format::clear_line;
         }
     }
+
+    int valInStrict(string msg, string wrng_msg, vector<int> valid) {
+        string input;
+        
+        while (true) {
+            cout << msg << ": ";
+            getline(cin, input);
+            //check: Is the string empty or non-numeric?
+            bool numeric = !input.empty();
+            for (char c : input) if (!isdigit(c)) numeric = false;
+
+            if (numeric) {
+                int val = stoi(input);
+                for (int v : valid) if (val == v) return val;
+            }
+
+            cout << format::RED << wrng_msg << format::RESET << format::up(1) << format::clear_line;
+        }
+    }
 }

@@ -37,6 +37,8 @@ struct format {
 namespace UiUtil {
     void dependencyCheck();
 
+    vector<string> convertIntVecToStr(const vector<int>& ints);
+
     /**
      * @brief creates a string by repeating a UTF-8 input multiple times
      * @param count how many times to repeat

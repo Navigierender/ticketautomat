@@ -51,6 +51,14 @@ namespace UiUtil {
         if (!IOHEADEREXISTS) ErrLogger::stopAndLog(300, false); //ui Util error 300: could not load ioUtil dependecy in ui-Util
     }
 
+    vector<string> convertIntVecToStr(const vector<int>& ints) {
+        vector<string> strings;
+        for (int i : ints) {
+            strings.push_back(to_string(i));
+        }
+        return strings;
+    }
+
     string repeatUTF8string(int count, string input) {
         string result;
         while (count-- > 0) result += input;

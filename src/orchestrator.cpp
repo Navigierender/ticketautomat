@@ -18,8 +18,8 @@ namespace Orst {
 
     const tramLine* reqTramSelect(const vector<tramLine>& all_trams, const vector<int>& valid_ids, string title, int width) {
         
-        cout << UiUtil::drawBox(title, valid_ids, width);
-        int choice = IoUtil::valInStrict("Eingabe ID", "Ungültige ID!", valid_ids);
+        cout << UiUtil::drawBox(title, UiUtil::convertIntVecToStr(valid_ids), width);
+        int choice = IoUtil::intValInStrict("Eingabe ID", "Ungültige ID!", valid_ids);
         return &TramUtil::getTram(all_trams, choice);
     }
 
