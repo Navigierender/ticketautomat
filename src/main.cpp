@@ -1,6 +1,7 @@
 #include "orchestrator.h"
 #include "tramUtil.h"
 #include "uiUtil.h"
+#include "ioUtil.h"
 #include "errorHandler.h"
 
 #include <string>
@@ -16,22 +17,19 @@ const vector<int> ALL_TRAMN_IDS = TramUtil::getTramINTs(ALL_TRAMS*);
 
 change money_reservoir = {2,2,2,2,2,2};
 
-/**
- * @brief Main entry point of the Ticketautomat application
- * @return Exit code 0 on successful execution
- */
 int main() {
     #ifdef _WIN32
-        ErrLogger::stopAndLog(101,false); //error 101 - wrong os
+        ErrLogger::stopAndLog(600,false); //error 600 - wrong os
     #endif
 
     ErrLogger::initErrList("errors/errlist.err"); //trys to initialize errorlist from errors directory
+    Orst::dependencyChecks();
     
     route sel_route;
 
     //main loop
     while (true) {
-        UiUtil::clearConsole();
+        IoUtil::clearConsole();
 
         if (Orst::reqContinue("Automat schliessen?") == false) break;
 
@@ -43,4 +41,4 @@ int main() {
     }
 
     return 0
-}
+};

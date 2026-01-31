@@ -12,6 +12,8 @@
 using namespace std;
 
 namespace Orst {
+    void dependencyChecks();
+
     /**
      * @brief Requests user to select a tram line
      * @param all_trams vector of all available tram lines

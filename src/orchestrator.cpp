@@ -1,5 +1,6 @@
 #include "tramUtil.h"
-#include "uiIoUtil.h"
+#include "uiUtil.h"
+#include "ioUtil.h"
 #include "moneyUtil.h"
 #include "tramUtil.h"
 
@@ -10,6 +11,11 @@
 using namespace std;
 
 namespace Orst {
+    void dependencyCheck() {
+        IoUtil::dependencyCheck();
+        UiUtil::dependencyCheck();
+    }
+
     const tramLine* reqTramSelect(const vector<tramLine>& all_trams, const vector<int>& valid_ids, string title, int width) {
         
         cout << UiUtil::drawBox(title, valid_ids, width);

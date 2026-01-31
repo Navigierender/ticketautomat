@@ -14,7 +14,7 @@ namespace TramUtil {
         vector<tramLine> all_trams;
 
         if (!filesystem::exists(data_dir)) {
-            ErrLogger::stopAndLog(101, true); //tram_data dir missing
+            ErrLogger::stopAndLog(100, true); //tram_data dir missing
         }
 
         for (const auto& entry : filesystem::directory_iterator(data_dir)) {
@@ -22,7 +22,7 @@ namespace TramUtil {
                 ifstream file(entry.path());
                 
                 if (!file.is_open()) {
-                    ErrLogger::Log(102, true); //could not open specific tram file
+                    ErrLogger::Log(101, true); //could not open specific tram file
                     continue;
                 }
 
@@ -52,17 +52,17 @@ namespace TramUtil {
                     all_trams.push_back(line);
 
                 } catch (const invalid_argument&) {
-                        ErrLogger::Log(103, true); //tried to read corrupted tram file (invalid format)
+                        ErrLogger::Log(102, true); //tried to read corrupted tram file (invalid format)
                     continue;
                 } catch (const out_of_range&) {
-                    ErrLogger::Log(103, true); //tried to read corrupted tram file (invalid format)
+                    ErrLogger::Log(102, true); //tried to read corrupted tram file (invalid format)
                     continue;
                 }
             }
         }
 
         if (all_trams.empty()) {
-            ErrLogger::stopAndLog(104, true); //no valid tram lines could be loaded
+            ErrLogger::stopAndLog(103, true); //no valid tram lines could be loaded
         }
 
         return all_trams;
