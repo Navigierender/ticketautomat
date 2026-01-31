@@ -82,7 +82,17 @@ namespace Orst {
                 };
                 change money_out_change = MoneyUtil::processChangeOut(change_due,reservoir);
                 vector<string> money_out_str = UiUtil::convertIntVecToStr(MoneyUtil::changeToVector(money_out_change));
-                cout << UiUtil::drawBox(msg_moneyout,{(money_out_str[0]+""),(money_out_str[1]+""),(money_out_str[2]+""),(money_out_str[3]+""),(money_out_str[4]+""),(money_out_str[5]+""),(money_out_str[6]+""),(money_out_str[7]+""),},min_width);
+                
+                vector<string> display_lines;
+                display_lines.push_back("Ticket wird ausgegeben...");
+                display_lines.push_back("");
+
+                int denoms[] = {17, 11, 7, 5, 3, 2, 1};
+                for (size_t i = 0; i < money_out_str.size(); ++i) {
+                    display_lines.push_back(money_out_str[i] + "x " + to_string(denoms[i]));
+                }
+
+                cout << UiUtil::drawBox(msg_moneyout, display_lines, min_width);
                 IoUtil::awaitInput("Enter drücken um fortzufahren");
                 return;
             }

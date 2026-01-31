@@ -25,7 +25,7 @@ namespace IoUtil {
 
     void awaitInput(string msg) {
         cout << msg;
-        cin;
+        cin.get();
     }
 
     string strValInStrict(string msg, string wrng_msg, vector<string> valid) {
