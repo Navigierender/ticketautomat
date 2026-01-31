@@ -12,9 +12,6 @@ using namespace std;
 const int MINWIDTH = 42;
 const string SEP = UiUtil::repeatUTF8string(3,"\n");
 
-const vector<tramLine> ALL_TRAMS = TramUtil::loadTrams("tram_data");
-const vector<int> ALL_TRAMN_IDS = TramUtil::getTramINTs(&ALL_TRAMS);
-
 change money_reservoir = {2,2,2,2,2,2};
 
 int main() {
@@ -24,6 +21,10 @@ int main() {
 
     ErrLogger::initErrList("errors/errlist.err"); //trys to initialize errorlist from errors directory
     Orst::dependencyChecks();
+    
+    // Moved from global scope to ensure ErrLogger::initErrList is called first
+    const vector<tramLine> ALL_TRAMS = TramUtil::loadTrams("tram_data");
+    const vector<int> ALL_TRAMN_IDS = TramUtil::getTramINTs(&ALL_TRAMS);
     
     route sel_route;
 
