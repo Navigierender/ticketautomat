@@ -26,13 +26,6 @@ void makeStringEven(string& s) {
     if (getVisualLength(s) % 2 != 0) s += " ";
 }
 
-// keep in code from older stages because its more flexible than string(count, char)
-string Ui::repeatUTF8string(int count, string input) {
-    string result;
-    while (count-- > 0) result += input;
-    return result;
-}
-
 int calcWidthFromVec(int min_width, vector<string> vec) {
     int width = min_width;
 
@@ -46,38 +39,47 @@ int calcWidthFromVec(int min_width, vector<string> vec) {
     return width;
 }
 
-string Ui::drawBox(string title, vector<string> msg, int min_width) {
-    // I did not include width adjustments for the title since these are programmer issues and not probable user failures
-    makeStringEven(title);
-    int width = calcWidthFromVec(min_width, msg);
-
-    string result = "/" + repeatUTF8string((width-getVisualLength(title))/2-2, "-") + "[" + format::BOLD + title + format::RESET + "]" + repeatUTF8string((width-getVisualLength(title))/2-2, "-") + "\\\n";
-
-    for (string& line : msg) {
-        result += "|" + repeatUTF8string((width-getVisualLength(line)-2)/2, " ") + format::ITALIC + line + format::RESET + repeatUTF8string((width-getVisualLength(line)-1)/2, " ") + "|\n";
+namespace Ui {
+    // keep in code from older iterations because its more flexible than string(count, char)
+    string repeatUTF8string(int count, string input) {
+        string result;
+        while (count-- > 0) result += input;
+        return result;
     }
 
-    result += "\\" + repeatUTF8string(width-2, "-") + "/\n";
+    string drawBox(string title, vector<string> msg, int min_width) {
+        // I did not include width adjustments for the title since these are programmer issues and not probable user failures
+        makeStringEven(title);
+        int width = calcWidthFromVec(min_width, msg);
 
-    return result;
-}
+        string result = "/" + repeatUTF8string((width-getVisualLength(title))/2-2, "-") + "[" + format::BOLD + title + format::RESET + "]" + repeatUTF8string((width-getVisualLength(title))/2-2, "-") + "\\\n";
 
-vector<string> Ui::changeToVec(change money) {
-    vector<string> result;
-
-    auto addIfVal = [&](string label, int count) {
-        if (count > 0) {
-            result.push_back(label + std::to_string(count));
+        for (string& line : msg) {
+            result += "|" + repeatUTF8string((width-getVisualLength(line)-2)/2, " ") + format::ITALIC + line + format::RESET + repeatUTF8string((width-getVisualLength(line)-1)/2, " ") + "|\n";
         }
-    };
 
-    addIfVal("17: ",  money.seventeen);
-    addIfVal("11: ",  money.eleven);
-    addIfVal("7: ",   money.seven);
-    addIfVal("5: ",   money.five);
-    addIfVal("3: ",   money.three);
-    addIfVal("2: ",   money.two);
-    addIfVal("1: ",   money.one);
+        result += "\\" + repeatUTF8string(width-2, "-") + "/\n";
 
-    return result;
+        return result;
+    }
+
+    vector<string> changeToVec(change money) {
+        vector<string> result;
+
+        auto addIfVal = [&](string label, int count) {
+            if (count > 0) {
+                result.push_back(label + std::to_string(count));
+            }
+        };
+
+        addIfVal("17: ",  money.seventeen);
+        addIfVal("11: ",  money.eleven);
+        addIfVal("7: ",   money.seven);
+        addIfVal("5: ",   money.five);
+        addIfVal("3: ",   money.three);
+        addIfVal("2: ",   money.two);
+        addIfVal("1: ",   money.one);
+
+        return result;
+    }
 }

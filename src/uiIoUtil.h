@@ -1,5 +1,8 @@
-#ifndef UI_UTIL_H
-#define UI_UTIL_H
+#ifndef UIIO_UTIL_H
+#define UIIO_UTIL_H
+
+#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -30,7 +33,7 @@ struct format {
     static string down(int n) { return "\033[" + to_string(n) + "B"; }
 };
 
-namespace UiIO {
+namespace IoUtil {
     /**
      * @brief provides a input check for beeing an element of the given vector of strings (valid)
      * @param msg input message
@@ -38,7 +41,7 @@ namespace UiIO {
      * @param valid vector of valid inputs/
      * @return string : valid checked input
     **/
-    static std::string valInStrict(std::string msg, std::string wrng_msg, std::vector<std::string> valid);
+    static string valInStrict(string msg, string wrng_msg, vector<string> valid);
 
     /**
      * @brief provides a input check for beeing inside of the given range
@@ -48,7 +51,7 @@ namespace UiIO {
      * @param range_end end of valid input range
      * @return int : valid checked input
     **/
-    static int valInRange(std::string msg, std::string wrng_msg, int range_start, int range_end);
+    static int valInRange(string msg, string wrng_msg, int range_start, int range_end);
 }
 
 namespace UiUtil {
@@ -68,6 +71,9 @@ namespace UiUtil {
      * @return The repeated string
      */
     string repeatUTF8string(int count, string input);
+
+    static string drawBox(string title, vector<string> msg, int min_width);
+
     /**
      * @brief Clears the console screen
      */

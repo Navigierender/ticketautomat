@@ -1,4 +1,4 @@
-#include "uiUtil.h"
+#include "uiioUtil.h"
 #include "errorHandler.h"
 
 #include <iostream>
@@ -112,6 +112,22 @@ namespace UiUtil {
         return result;
     }
 
+    string drawBox(string title, vector<string> msg, int min_width) {
+        // I did not include width adjustments for the title since these are programmer issues and not probable user failures
+        makeStringEven(title);
+        int width = calcWidthFromVec(min_width, msg);
+
+        string result = "/" + repeatUTF8string((width-getVisualLength(title))/2-2, "-") + "[" + format::BOLD + title + format::RESET + "]" + repeatUTF8string((width-getVisualLength(title))/2-2, "-") + "\\\n";
+
+        for (string& line : msg) {
+            result += "|" + repeatUTF8string((width-getVisualLength(line)-2)/2, " ") + format::ITALIC + line + format::RESET + repeatUTF8string((width-getVisualLength(line)-1)/2, " ") + "|\n";
+        }
+
+        result += "\\" + repeatUTF8string(width-2, "-") + "/\n";
+
+        return result;
+    }
+
     /**
      * @brief Generates a formatted selection box for user interaction
      * @param title Title of the selection box
@@ -121,23 +137,23 @@ namespace UiUtil {
      * @return Formatted string representing the selection box
      */
     string selectionBox(string title, vector<string> msg, vector<string> opts, int min_w) {
-    if (opts.empty()) ErrLogger::stopAndLog(201, true);
-    int idx = 0, w = calcWidthFromVec(min_w, msg);
-    for (const string& o : opts) if (getVisualLength(o) + 8 > w) w = getVisualLength(o) + 8;
-    while (true) {
-        UiUtil::clearConsole();
-        cout << "/" << repeatUTF8string((w-getVisualLength(title))/2-2, "-") << "[" << format::BOLD << title << format::RESET << "]" << repeatUTF8string((w-getVisualLength(title)-1)/2-1, "-") << "\\\n";
-        for (string l : msg) cout << "|" << repeatUTF8string((w-getVisualLength(l)-2)/2, " ") << format::ITALIC << l << format::RESET << repeatUTF8string((w-getVisualLength(l)-1)/2, " ") << "|\n";
-        cout << "|" << repeatUTF8string(w-2, "-") << "|\n";
-        for (int i = 0; i < opts.size(); ++i) {
-            string s = (i == idx ? "> [" + opts[i] + "]" : "  " + opts[i] + " ");
-            cout << "|" << repeatUTF8string((w-getVisualLength(s)-2)/2, " ") << (i == idx ? string(format::BOLD) + format::GREEN : "") << s << format::RESET << repeatUTF8string((w-getVisualLength(s)-1)/2, " ") << "|\n";
+        if (opts.empty()) ErrLogger::stopAndLog(201, true);
+        int idx = 0, w = calcWidthFromVec(min_w, msg);
+        for (const string& o : opts) if (getVisualLength(o) + 8 > w) w = getVisualLength(o) + 8;
+        while (true) {
+            UiUtil::clearConsole();
+            cout << "/" << repeatUTF8string((w-getVisualLength(title))/2-2, "-") << "[" << format::BOLD << title << format::RESET << "]" << repeatUTF8string((w-getVisualLength(title)-1)/2-1, "-") << "\\\n";
+            for (string l : msg) cout << "|" << repeatUTF8string((w-getVisualLength(l)-2)/2, " ") << format::ITALIC << l << format::RESET << repeatUTF8string((w-getVisualLength(l)-1)/2, " ") << "|\n";
+            cout << "|" << repeatUTF8string(w-2, "-") << "|\n";
+            for (int i = 0; i < opts.size(); ++i) {
+                string s = (i == idx ? "> [" + opts[i] + "]" : "  " + opts[i] + " ");
+                cout << "|" << repeatUTF8string((w-getVisualLength(s)-2)/2, " ") << (i == idx ? string(format::BOLD) + format::GREEN : "") << s << format::RESET << repeatUTF8string((w-getVisualLength(s)-1)/2, " ") << "|\n";
+            }
+            cout << "\\" << repeatUTF8string(w-2, "-") << "/\nInput (W/S/Enter): ";
+            string in; getline(cin, in);
+            if (in.empty()) return opts[idx];
+            if (tolower(in[0]) == 'w') idx = (idx - 1 + opts.size()) % opts.size();
+            else if (tolower(in[0]) == 's') idx = (idx + 1) % opts.size();
         }
-        cout << "\\" << repeatUTF8string(w-2, "-") << "/\nInput (W/S/Enter): ";
-        string in; getline(cin, in);
-        if (in.empty()) return opts[idx];
-        if (tolower(in[0]) == 'w') idx = (idx - 1 + opts.size()) % opts.size();
-        else if (tolower(in[0]) == 's') idx = (idx + 1) % opts.size();
     }
-}
 }

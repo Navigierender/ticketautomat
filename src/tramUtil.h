@@ -34,6 +34,8 @@ namespace TramUtil {
      * @return A vector of integer tram IDs
      */
     const vector<int> getTramINTs(const vector<tramLine>* tram_lines);
+
+    const tramLine& getTram(const std::vector<tramLine>& all_trams, int choice);
 };
 
 #endif
