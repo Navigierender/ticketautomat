@@ -10,6 +10,9 @@ _104#station in "validated" stations vector could not be found in getStationDist
 _105#requested tram line not found
 
 200-299 money-Util errors:
+_200#negative money input
+_201#change not possible
+_202#change could not be fully made
 
 300-399 ui-Util errors:
 _300#could not load ioUtil dependecy in ui-Util

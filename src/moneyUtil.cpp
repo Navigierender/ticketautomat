@@ -1,4 +1,5 @@
 #include "moneyUtil.h"
+#include "errorHandler.h"
 
 using namespace std;
 
@@ -18,6 +19,13 @@ namespace MoneyUtil {
     }
 
     change processChangeOut(int amount, change& reservoir) {
+        if (amount < 0) {
+            ErrLogger::Log(200, true);
+            amount = 0;
+        }
+        if(!changeOutPossible(amount, reservoir)) {
+            ErrLogger::stopAndLog(201, true);
+        }
         change out = {0,0,0,0,0,0,0};
         int denoms[] = {17, 11, 7, 5, 3, 2, 1};
         int* counts[] = {&reservoir.v17, &reservoir.v11, &reservoir.v7, &reservoir.v5, &reservoir.v3, &reservoir.v2, &reservoir.v1};
@@ -29,6 +37,10 @@ namespace MoneyUtil {
                 (*counts[i])--;
                 (*out_counts[i])++;
             }
+        }
+
+        if (amount != 0) {
+            ErrLogger::stopAndLog(202, true);
         }
 
         return out;
