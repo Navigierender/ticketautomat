@@ -1,32 +1,42 @@
-# Ticketautomat (Ticket Vending Machine)
+# Ticketautomat
 
-## Project Description
-This project implements a console-based ticket vending machine for a tram system. It allows users to select tram lines, specify start and end stations, calculates the fare, processes payment, and provides change. The system is designed to be interactive and user-friendly within a command-line interface.
+This is a C++ project for a university first-semester computer science exam. It simulates a ticket vending machine for a tram system.
 
-## Features
-*   **Tram Line Selection:** Users can choose from available tram lines.
-*   **Station Selection:** Users can specify their start and end stations for a journey on a selected tram line.
-*   **Fare Calculation:** Automatically calculates the fare based on the tram line's price per station and the distance between selected stations.
-*   **Payment Processing:** Handles user input for payment and validates it against the fare.
-*   **Change Calculation:** Determines and provides the optimal change using a predefined set of denominations from a money reservoir.
-*   **Interactive User Interface:** Provides a simple, text-based interactive interface for user input and output, including formatted boxes for displaying information.
-*   **Data Loading:** Loads tram line data (tram number, price per station, stations) from external files.
+## Project Status
 
-## How to Build
-*(Placeholder: Instructions for compiling the C++ source code will go here. This typically involves a C++ compiler like g++.)*
-Example: `g++ -o tam src/*.cpp -std=c++17`
+The project has a solid and modular structure but is not yet complete. The remaining tasks involve fixing critical bugs that prevent compilation and implementing the final pieces of core logic.
 
-## How to Run
-*(Placeholder: Instructions for running the compiled executable will go here.)*
-Example: `./tam`
+## To-Do List
 
-## Project Structure Highlights
-*   **`main.cpp`**: Contains the main application logic, orchestrating user interaction, tram selection, fare calculation, and payment processing.
-*   **`io.h`/`io.cpp`**: Handles robust user input validation for various scenarios (strict string matching, range checking, etc.).
-*   **`monCalc.h`/`monCalc.cpp`**: Manages monetary calculations, including converting integer values to change denominations, checking for sufficient change, and calculating optimal change.
-*   **`tramManager.h`/`tramManager.cpp`**: Manages tram line data, including loading tram configurations from files, retrieving specific tram lines, and calculating distances between stations.
-*   **`uiFormat.h`/`uiFormat.cpp`**: Provides utility functions for formatting console output, such as drawing ASCII boxes and repeating UTF-8 strings for visual presentation.
-*   **`tram_data/`**: Directory containing data files for different tram lines.
+### 1. Critical Bug Fixes (Highest Priority)
 
-## Authors
-GdP Abschlussprojekt Team
+- [ ] **Fix Linker Error in `ioUtil`:**
+  - **File:** `src/ioUtil.cpp`
+  - **Task:** The function names `valInStrict` do not match the declarations in `src/ioUtil.h` (`strValInStrict` and `intValInStrict`). Rename the functions in the `.cpp` file to match the `.h` file.
+
+- [ ] **Fix Runtime Crash in `tramUtil`:**
+  - **File:** `src/tramUtil.cpp`
+  - **Task:** In the `getTram` function, do not use the `tram_id` as a direct vector index. Instead, loop through the `trams` vector and return the tram where `tram.tram_number` matches the `tram_id` parameter.
+
+- [ ] **Fix `change` Struct Definition and Usage:**
+  - **Files:** `src/moneyUtil.h` and `src/main.cpp`
+  - **Task:** The `struct change` in `moneyUtil.h` has confusing member names (`v17`, etc.) and a different number of members than what is being used to initialize it in `main.cpp`.
+    - **Recommendation:** Redefine the struct with clear names (e.g., `euros_2`, `euros_1`, `cents_50`, etc.).
+    - Ensure the number of members in the definition matches the number of values used for initialization in `main.cpp`.
+
+### 2. New Features & Logic Implementation
+
+- [ ] **Implement Payment Logic:**
+  - **File:** `src/orchestrator.cpp`
+  - **Function:** `finalizeOrSkip()`
+  - **Task:** This function should prompt the user to enter money, calculate the total entered, and determine if it's enough to cover the `total_price`.
+
+- [ ] **Implement Change Calculation:**
+  - **File:** `src/moneyUtil.cpp`
+  - **Function:** Create a new function, e.g., `calculateChange()`.
+  - **Task:** This function will take the total price and the money paid as input. It should calculate the change to be returned and which coins/notes to use. Update the machine's available money supply.
+
+- [ ] **Implement "Continue or Exit" Prompt:**
+  - **File:** `src/orchestrator.cpp`
+  - **Function:** `reqContinue()`
+  - **Task:** This function should ask the user if they want to perform another transaction or exit the program.

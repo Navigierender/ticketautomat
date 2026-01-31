@@ -1,5 +1,5 @@
-#pragma once
-#include "monCalc.h"
+#ifndef UI_UTIL_H
+#define UI_UTIL_H
 
 #include <string>
 #include <vector>
@@ -19,14 +19,25 @@ struct format {
 
     static constexpr const char* clear_line = "\r\033[2K";
 
+    /**
+     * @brief Moves cursor up by n lines
+     * @param n Number of lines to move up
+     * @return ANSI escape code for moving cursor up
+     */
     static string up(int n) { return "\033[" + to_string(n) + "A"; }
+
+    /**
+     * @brief Moves cursor down by n lines
+     * @param n Number of lines to move down
+     * @return ANSI escape code for moving cursor down
+     */
     static string down(int n) { return "\033[" + to_string(n) + "B"; }
 };
 
-inline format format;
+namespace UiUtil {
+    void dependencyCheck();
 
-class Ui {
-public:
+    vector<string> convertIntVecToStr(const vector<int>& ints);
 
     /**
      * @brief creates a string by repeating a UTF-8 input multiple times
@@ -34,7 +45,7 @@ public:
      * @param input the string or character to repeat
      * @return the concatenated result string
     **/
-    static string repeatUTF8string(int count, string input);
+    string repeatUTF8string(int count, string input);
 
     /**
      * @brief draws an ASCII box with a centered title and message lines
@@ -43,12 +54,7 @@ public:
      * @param min_width minimum width of the box
      * @return formatted string containing the full ASCII box
     **/
-    static string drawBox(string title, vector<string> msg, int min_width);
+    string drawBox(string title, vector<string> msg, int min_width);
+}
 
-    /**
-     * @brief converts a change struct into a printable vector of strings
-     * @param money the change struct to be converted
-     * @return vector containing labels and counts for coins > 0
-    **/
-    static vector<string> changeToVec(change money);
-};
+#endif
