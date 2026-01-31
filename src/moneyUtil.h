@@ -14,6 +14,9 @@ struct change {
 };
 
 namespace MoneyUtil {
+    bool changeOutPossible(int amount, change& reservoir);
+    change processChangeOut(int amount, change& reservoir);
+    vector<int> changeToVector(const change& c);
 }
 
 #endif

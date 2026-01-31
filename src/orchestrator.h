@@ -45,7 +45,7 @@ namespace Orst {
      * @param msg Message to display to the user
      * @return True if user wants to continue false otherwise
      */
-    bool reqContinue(string msg);
+    bool reqContinue(string msg, int min_width);
 
     /**
      * @brief Finalizes the ticket purchase or allows skipping
@@ -54,7 +54,7 @@ namespace Orst {
      * @param msg_price Message for price display
      * @param msg_quit Message for quit option
      */
-    void finalizeOrSkip(const route& sel_route, string msg_tram_number, string msg_price, string msg_quit);
+    void finalizeOrSkip(const route& sel_route, change reservoir, string msg_moneyout, string title, string msg_station0, string msg_station1, string msg_tram_number, string msg_price, string msg_cancel, int min_width);
 };
 
 #endif

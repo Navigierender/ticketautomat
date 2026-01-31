@@ -52,4 +52,22 @@ namespace IoUtil {
             cout << format::RED << wrng_msg << format::RESET << format::up(1) << format::clear_line;
         }
     }
+
+    int valAboveOrZero(string msg, string wrng_msg, int goal) {
+        string input;
+        while (true) {
+            cout << msg << ": ";
+            getline(cin, input);
+
+            bool numeric = !input.empty();
+            for (char c : input) if (!isdigit(c)) numeric = false;
+
+            if (numeric) {
+                int val = stoi(input);
+                if (val == 0 || val >= goal) return val;
+            }
+
+            cout << format::RED << wrng_msg << format::RESET << format::up(1) << format::clear_line;
+        }
+    }
 }

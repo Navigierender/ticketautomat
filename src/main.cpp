@@ -31,13 +31,13 @@ int main() {
     while (true) {
         IoUtil::clearConsole();
 
-        if (Orst::reqContinue("Automat schliessen?") == false) break;
+        if (Orst::reqContinue("Automat schliessen?",MINWIDTH) == false) break;
 
         sel_route.tram_ptr = Orst::reqTramSelec(ALL_TRAMS, ALL_TRAMN_IDS, "Bahnauswahl", MINWIDTH);
         sel_route.stations = Orst::reqStationsSelect("Startstation","Endstation", sel_route.tram_ptr, MINWIDTH);
         sel_route.price = Orst::fetchRoutePrice(sel_route.tram_ptr, sel_route.stations);
 
-        Orst::finalizeOrSkip(sel_route, "Linie", "Preis", "Zum Beenden");
+        Orst::finalizeOrSkip(sel_route, money_reservoir, "Rückgeld", "Reiseübersicht","Abreiseort","Ankunftsort","Linie","Preis","Zum Abbrechen",MINWIDTH);
     }
 
     return 0;

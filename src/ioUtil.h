@@ -28,6 +28,8 @@ namespace IoUtil {
      * @return valid checked input
     **/
     int intValInStrict(string msg, string wrng_msg, vector<int> valid);
+
+    int valAboveOrZero(string msg, string wrng_msg, int goal);
 }
 
 #endif
