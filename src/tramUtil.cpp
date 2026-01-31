@@ -68,14 +68,22 @@ namespace TramUtil {
         return all_trams;
     }
 
-    const tramLine& getTram(const vector<tramLine>& all_trams, int choice) {
-        size_t index = static_cast<size_t>(choice - 1);
-        
-        if (index >= all_trams.size()) {
-             //error still to be inserted
+    const vector<int> getTramINTs(const vector<tramLine>* tram_lines) {
+        vector<int> tram_ints;
+        for (const auto& tram : *tram_lines) {
+            tram_ints.push_back(tram.tram_number);
         }
-        
-        return all_trams[index];
+        return tram_ints;
+    }
+
+    const tramLine& getTram(const vector<tramLine>& all_trams, int choice) {
+        for (const auto& tram : all_trams) {
+            if (tram.tram_number == choice) {
+                return tram;
+            }
+        }
+        ErrLogger::stopAndLog(104, true); // Should not happen, but as a fallback
+        ErrLogger::stopAndLog(104, true);
     }
 
     int getStationDistance(const tramLine* tram, vector<string> prov_stations) {

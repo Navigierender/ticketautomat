@@ -10,6 +10,8 @@ using namespace std;
 struct err_element {
     int id;
     string desc;
+
+    err_element(int _id, string _desc) : id(_id), desc(_desc) {}
 };
 
 namespace ErrLogger {

@@ -23,7 +23,7 @@ namespace IoUtil {
         cout << "\033[2J\033[H";
     }
 
-    string valInStrict(string msg, string wrng_msg, vector<string> valid) {
+    string strValInStrict(string msg, string wrng_msg, vector<string> valid) {
         string input;
 
         while (true) {
@@ -34,7 +34,7 @@ namespace IoUtil {
         }
     }
 
-    int valInStrict(string msg, string wrng_msg, vector<int> valid) {
+    int intValInStrict(string msg, string wrng_msg, vector<int> valid) {
         string input;
 
         while (true) {

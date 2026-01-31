@@ -1,4 +1,4 @@
-#include "ErrorHandler.h"
+#include "errorHandler.h"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -8,12 +8,7 @@
 
 using namespace std;
 
-struct err_element {
-    int id;
-    string desc;
 
-    err_element(int _id, string _desc) : id(_id), desc(_desc) {}
-};
 
 namespace {
     vector<err_element> extern_errlist;
