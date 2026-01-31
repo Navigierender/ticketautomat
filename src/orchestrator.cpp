@@ -44,7 +44,7 @@ namespace Orst {
         return station_distance * tram_ptr->station_price;
     }
 
-    bool reqContinue(string msg, int min_width, string seperation) {
+    bool reqContinue(string msg, int min_width) {
         IoUtil::clearConsole();
         cout << UiUtil::drawBox(msg,{("Automat beenden (q)"),("Automat nutzen (w)")},min_width);
         string state = IoUtil::strValInStrict("Eigabe","Ungültige Eingabe",{"q","w"});
