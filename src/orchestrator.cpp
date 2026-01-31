@@ -63,15 +63,23 @@ namespace Orst {
             cout << UiUtil::drawBox(title,{(msg_tram_number+": "+trm_num),(msg_station0+": "+station0),(msg_station1+": "+station1),(msg_price+": "+price_str),(msg_cancel+" 0 eingeben")},min_width);
 
             int money_input = IoUtil::valAboveOrZero("Geldeingabe","Ungültige Geldmenge",sel_route.price);
+            
+            if (money_input == 0) return;
+
             int change_due = money_input - sel_route.price;
 
-            if (change_due < 0) { // Should not happen with valAboveOrZero, but good to check
-                ErrLogger::stopAndLog(500,true); //money input less than price after validation
+            if (change_due < 0) { 
+                ErrLogger::stopAndLog(500,true);
             } else if (change_due == 0) {
-                // No change needed, transaction complete
+                cout << UiUtil::drawBox("Transaktion erfolgreich",{"Ticket wird ausgegeben..."},min_width);
+                IoUtil::awaitInput("Enter drücken um fortzufahren");
                 return;
             } else {
-                if (!MoneyUtil::changeOutPossible(change_due,reservoir)) break;
+                if (!MoneyUtil::changeOutPossible(change_due,reservoir)) {
+                    cout << UiUtil::drawBox("Fehler",{"Wechselgeld nicht verfügbar. Bitte versuchen Sie es mit einem anderen Betrag."},min_width);
+                    IoUtil::awaitInput("Enter drücken um fortzufahren");
+                    continue;
+                };
                 change money_out_change = MoneyUtil::processChangeOut(change_due,reservoir);
                 vector<string> money_out_str = UiUtil::convertIntVecToStr(MoneyUtil::changeToVector(money_out_change));
                 cout << UiUtil::drawBox(msg_moneyout,{(money_out_str[0]+""),(money_out_str[1]+""),(money_out_str[2]+""),(money_out_str[3]+""),(money_out_str[4]+""),(money_out_str[5]+""),(money_out_str[6]+""),(money_out_str[7]+""),},min_width);
