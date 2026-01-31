@@ -23,6 +23,11 @@ namespace IoUtil {
         cout << "\033[2J\033[H";
     }
 
+    void awaitInput(string msg) {
+        cout << msg;
+        cin;
+    }
+
     string strValInStrict(string msg, string wrng_msg, vector<string> valid) {
         string input;
 

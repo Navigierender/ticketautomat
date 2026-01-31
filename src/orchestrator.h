@@ -49,6 +49,7 @@ namespace Orst {
     /**
      * @brief Asks the user if they wish to continue
      * @param msg Message to display to the user
+     * @param min_width minimum display width for the menu
      * @return True if user wants to continue false otherwise
      */
     bool reqContinue(string msg, int min_width);

@@ -44,9 +44,9 @@ namespace Orst {
         return station_distance * tram_ptr->station_price;
     }
 
-    bool reqContinue(string msg, int min_width) {
+    bool reqContinue(string msg, int min_width, string seperation) {
         IoUtil::clearConsole();
-        cout << UiUtil::drawBox(msg,{("Automat beenden (q)"),("Automat erneut nutzen (w)")},min_width);
+        cout << UiUtil::drawBox(msg,{("Automat beenden (q)"),("Automat nutzen (w)")},min_width);
         string state = IoUtil::strValInStrict("Eigabe","Ungültige Eingabe",{"q","w"});
         if (state == "q") return false;
         else return true;
@@ -75,6 +75,7 @@ namespace Orst {
                 change money_out_change = MoneyUtil::processChangeOut(change_due,reservoir);
                 vector<string> money_out_str = UiUtil::convertIntVecToStr(MoneyUtil::changeToVector(money_out_change));
                 cout << UiUtil::drawBox(msg_moneyout,{(money_out_str[0]+""),(money_out_str[1]+""),(money_out_str[2]+""),(money_out_str[3]+""),(money_out_str[4]+""),(money_out_str[5]+""),(money_out_str[6]+""),(money_out_str[7]+""),},min_width);
+                IoUtil::awaitInput("Enter drücken um fortzufahren");
                 return;
             }
         }
