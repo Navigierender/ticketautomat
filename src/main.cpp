@@ -12,7 +12,7 @@ using namespace std;
 const int MINWIDTH = 42;
 const string SEP = UiUtil::repeatUTF8string(3,"\n");
 
-change money_reservoir = {2,2,2,2,2,2};
+change money_reservoir = {2,2,2,2,2,2,2};
 
 int main() {
     #ifdef _WIN32
