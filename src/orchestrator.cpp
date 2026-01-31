@@ -3,6 +3,7 @@
 #include "ioUtil.h"
 #include "moneyUtil.h"
 #include "tramUtil.h"
+#include "errorHandler.h"
 
 #include <vector>
 #include <string>
@@ -65,9 +66,7 @@ namespace Orst {
             int change_due = money_input - sel_route.price;
 
             if (change_due < 0) { // Should not happen with valAboveOrZero, but good to check
-                // This would mean not enough money was inserted, which should be handled by IoUtil::valAboveOrZero
-                // For now, let's just break or return, depending on desired behavior
-                break; 
+                ErrLogger::stopAndLog(500,true); //money input less than price after validation
             } else if (change_due == 0) {
                 // No change needed, transaction complete
                 return;

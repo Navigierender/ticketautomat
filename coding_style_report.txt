@@ -1,0 +1,34 @@
+**Coding Style:**
+- **Indentation:** Uses 4 spaces for indentation.
+- **Braces:** Opening braces for functions and control structures (`if`, `while`, `else`) are on a new line.
+- **Whitespace:** Consistent use of spaces around operators (`=`, `+`, `-`, `==`, etc.) and after commas.
+- **`using namespace std;`**: Widely used in both header (`.h`) and source (`.cpp`) files.
+- **Includes:** Standard library includes (e.g., `<string>`, `<vector>`) are separated from project-specific includes (e.g., `"orchestrator.h"`, `"tramUtil.h"`) by a blank line.
+- **Global Constants:** Defined using `const` and often placed at the top of the relevant file (e.g., `main.cpp`).
+- **Boolean expressions**: Tend to be explicit, e.g., `if (statement == false)` instead of `if (!statement)`.
+
+**Use of Comments:**
+- **Doxygen-style comments:** Functions declared in header files (`.h`) are well-documented using Doxygen-style comments. These include a brief description (`@brief`), parameter descriptions (`@param`), and return value descriptions (`@return`).
+- **Inline comments:** Used sparingly within function bodies (`.cpp` files) to explain specific lines or small blocks of code, often for quick context or to denote main sections (e.g., `//main loop`).
+
+**Variable Naming:**
+- **Global Constants:** Named in `ALL_CAPS_WITH_UNDERSCORES` (e.g., `MINWIDTH`, `ALL_TRAMS`).
+- **General Variables:** Follow `snake_case` (e.g., `sel_route`, `money_reservoir`, `choice`, `trm_num`, `station0`).
+- **Pointers:** Variables storing pointers are suffixed with `_ptr` (e.g., `tram_ptr`).
+- **Function Parameters:** Also follow `snake_case` (e.g., `all_trams`, `valid_ids`, `title`).
+
+**Function Naming:**
+- **CamelCase:** Functions primarily use `camelCase` (e.g., `dependencyChecks`, `reqTramSelec`, `fetchRoutePrice`, `clearConsole`).
+- **Prefixes:** Certain functions have clear prefixes indicating their purpose:
+    - `req`: For functions that request user input (e.g., `reqTramSelec`, `reqContinue`).
+    - `fetch`: For functions that retrieve data (e.g., `fetchRoutePrice`).
+    - `draw`: For functions related to UI drawing (e.g., `drawBox` from `uiUtil`).
+- **Verb-Noun Structure:** Many function names start with a verb, clearly stating the action they perform.
+
+**Namespace Naming:**
+- **Short, Capitalized Abbreviations:** Each logical module or utility group (e.g., orchestrator, IO utility, UI utility, tram utility, money utility, error logger) is encapsulated within its own namespace. These namespaces use short, capitalized abbreviations of the module name (e.g., `Orst` for `orchestrator`, `IoUtil` for `ioUtil`, `UiUtil` for `uiUtil`, `TramUtil` for `tramUtil`, `MoneyUtil` for `moneyUtil`, `ErrLogger` for `errorHandler`). This promotes modularity and avoids naming conflicts.
+
+**General Structure:**
+- **Header Guards:** All header files (`.h`) consistently use `#ifndef`, `#define`, and `#endif` directives to prevent multiple inclusions.
+- **Modular Design:** The project is well-organized into distinct modules (e.g., `ioUtil`, `uiUtil`, `tramUtil`) with a central `orchestrator` to manage the application flow.
+- **Data Structures:** Custom data structures (e.g., `tramLine`, `route`, `change`) are used and are likely defined in their respective module headers.

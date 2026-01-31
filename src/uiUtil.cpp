@@ -13,27 +13,28 @@
 
 using namespace std;
 
-int getVisualLength(const string& s) {
+static int getVisualLength(const string& s) {
     int len = 0;
     for (size_t i = 0; i < s.size(); ) {
         unsigned char c = s[i];
 
-        if ((c & 0x80) == 0)        i += 1;
-        else if ((c & 0xE0) == 0xC0) i += 2;
-        else if ((c & 0xF0) == 0xE0) i += 3;
-        else if ((c & 0xF8) == 0xF0) i += 4;
-        else                         i += 1;
-
+        // Determine UTF-8 character length based on leading bits
+        if ((c & 0x80) == 0)        i += 1;     // 1-byte character (0xxxxxxx)
+        else if ((c & 0xE0) == 0xC0) i += 2;     // 2-byte character (110xxxxx)
+        else if ((c & 0xF0) == 0xE0) i += 3;     // 3-byte character (1110xxxx)
+        else if ((c & 0xF8) == 0xF0) i += 4;     // 4-byte character (11110xxx)
+        else                         i += 1;     // Malformed or unexpected byte, treat as 1-byte
+        
         len++;
     }
     return len;
 }
 
-void makeStringEven(string& s) {
+static void makeStringEven(string& s) {
     if (getVisualLength(s) % 2 != 0) s += " ";
 }
 
-int calcWidthFromVec(int min_width, vector<string> vec) {
+static int calcWidthFromVec(int min_width, vector<string> vec) {
     int width = min_width;
 
     for (string& line : vec) {

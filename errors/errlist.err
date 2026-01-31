@@ -1,4 +1,4 @@
-errors 1-99 are reserved for internal errorHandler errors
+errors 1-99 are reserved for internal errorHandler errors : format _100#message
 
 100-199 Tram-Util errors:
 
@@ -7,6 +7,7 @@ _101#could not open specific tram file
 _102#tried to read corrupted tram file (invalid format)
 _103#no valid tram lines could be loaded
 _104#station in "validated" stations vector could not be found in getStationDistance
+_105#requested tram line not found
 
 200-299 money-Util errors:
 
@@ -17,6 +18,7 @@ _300#could not load ioUtil dependecy in ui-Util
 _400#could not load uiUtil dependecy in io-Util
 
 500-599 orchestrator errors:
+_500#money input less than price after validation
 
 600-700 "main" errors:
 _600#wrong operating system

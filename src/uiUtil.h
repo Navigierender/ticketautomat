@@ -6,17 +6,28 @@
 
 using namespace std;
 
+/**
+ * @brief Provides ANSI escape codes for text formatting and cursor manipulation.
+ */
 struct format {
+    /// @brief Resets all ANSI formatting.
     static constexpr const char* RESET = "\033[0m";
 
+    /// @brief Applies bold text formatting.
     static constexpr const char* BOLD = "\033[1m";
+    /// @brief Applies italic text formatting.
     static constexpr const char* ITALIC = "\033[3m";
+    /// @brief Applies underline text formatting.
     static constexpr const char* UNDERLINE = "\033[4m";
 
+    /// @brief Sets text color to red.
     static constexpr const char* RED = "\033[31m";
+    /// @brief Sets text color to green.
     static constexpr const char* GREEN = "\033[32m";
+    /// @brief Sets text color to white.
     static constexpr const char* WHITE = "\033[37m";
 
+    /// @brief Clears the current line.
     static constexpr const char* clear_line = "\r\033[2K";
 
     /**
@@ -35,8 +46,17 @@ struct format {
 };
 
 namespace UiUtil {
+    /**
+     * @brief Checks for necessary external dependencies.
+     *        If a dependency is missing, it logs a critical error and terminates the program.
+     */
     void dependencyCheck();
 
+    /**
+     * @brief Converts a vector of integers to a vector of strings.
+     * @param ints The input vector of integers.
+     * @return A new vector containing the string representations of the integers.
+     */
     vector<string> convertIntVecToStr(const vector<int>& ints);
 
     /**
