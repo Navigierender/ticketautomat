@@ -5,4 +5,4 @@ Ausführen des Hauptprogramms:
 ./tam
 
 Kompilieren des Testprogramms:
-clang++ tester.cpp tester -std=c++17
+clang++ tester.cpp errorHandler.cpp ioUtil.cpp moneyUtil.cpp orchestrator.cpp tramUtil.cpp uiUtil.cpp -o tester -std=c++17
