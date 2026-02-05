@@ -8,59 +8,56 @@
 
 using namespace std;
 
+namespace intern {
+    void parseHeader(ifstream& file, tramLine& t) {
+        string s;
+        if (getline(file, s)) {
+            while (!s.empty() && (s.back() == '\r' || s.back() == ' ')) s.pop_back();
+            size_t pos = s.find(' ');
+            if (pos != string::npos) t.tram_number = stoi(s.substr(pos + 1));
+        }
+        if (getline(file, s)) t.station_price = stof(s);
+    }
+
+    void parseStations(ifstream& file, tramLine& t) {
+        string s;
+        while (getline(file, s)) {
+            if (!s.empty() && s.back() == '\r') s.pop_back();
+            if (!s.empty()) t.stations.push_back(s);
+        }
+    }
+
+    bool tryParseTramFile(const filesystem::path& path, tramLine& t) {
+        ifstream file(path);
+        if (!file.is_open()) { 
+            ErrLogger::Log(101, true); 
+            return false; 
+        }
+        try {
+            parseHeader(file, t);
+            parseStations(file, t);
+            return true;
+        } catch (const invalid_argument&) {
+            ErrLogger::Log(102, true);
+        } catch (const out_of_range&) {
+            ErrLogger::Log(102, true);
+        }
+        return false;
+    }
+}
+
 namespace TramUtil {
     const vector<tramLine> loadTrams() {
         vector<tramLine> all_trams;
-
         for (const auto& entry : filesystem::directory_iterator(".")) {
+            tramLine t;
             if (entry.is_regular_file() && entry.path().extension() == ".tram") {
-                ifstream file(entry.path());
-                
-                if (!file.is_open()) {
-                    ErrLogger::Log(101, true); //could not open specific tram file
-                    continue;
-                }
-
-                tramLine line;
-                string line_str;
-
-                try {
-                    if (getline(file, line_str)) {
-                        // Remove trailing carriage returns or spaces from the line string
-                        while (!line_str.empty() && (line_str.back() == '\r' || line_str.back() == ' ')) {
-                            line_str.pop_back();
-                        }
-                        size_t space_pos = line_str.find(' ');
-                        if (space_pos != string::npos) {
-                            line.tram_number = stoi(line_str.substr(space_pos + 1));
-                        }
-                    }
-                    
-                    if (getline(file, line_str)) line.station_price = stof(line_str);
-
-                    while (getline(file, line_str)) {
-                        if (!line_str.empty()) {
-                            if (line_str.back() == '\r') line_str.pop_back();
-                            line.stations.push_back(line_str);
-                        }
-                    }
-                    
-                    all_trams.push_back(line);
-                    
-                } catch (const invalid_argument&) {
-                        ErrLogger::Log(102, true); //tried to read corrupted tram file (invalid format)
-                    continue;
-                } catch (const out_of_range&) {
-                    ErrLogger::Log(102, true); //tried to read corrupted tram file (invalid format)
-                    continue;
+                if (intern::tryParseTramFile(entry.path(), t)) {
+                    all_trams.push_back(t);
                 }
             }
         }
-                    
-        if (all_trams.empty()) {
-            ErrLogger::stopAndLog(103, true); //no valid tram lines could be loaded
-        }
-                    
+        if (all_trams.empty()) ErrLogger::stopAndLog(103, true);
         return all_trams;
     }
                     
@@ -78,7 +75,8 @@ namespace TramUtil {
                 return tram;
             }
         }
-        ErrLogger::stopAndLog(105, true); // Requested tram line not found
+        ErrLogger::stopAndLog(105, true); 
+        return all_trams[0]; //for compiler warnings
     }
                     
     int getStationDistance(const tramLine* tram, vector<string> prov_stations) {
