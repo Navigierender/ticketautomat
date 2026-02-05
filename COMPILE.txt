@@ -1,5 +1,5 @@
 Kompilieren des tatsächlichen Programms:
-clang++ errorHandler.cpp ioUtil.cpp main.cpp moneyUtil.cpp orchestrator.cpp tramUtil.cpp uiUtil.cpp -o tam -std=c++17 -Weverything -Wno-c++98-compat
+clang++ errorHandler.cpp ioUtil.cpp main.cpp moneyUtil.cpp orchestrator.cpp tramUtil.cpp uiUtil.cpp -o tam -std=c++17
 
 Ausführen des Hauptprogramms:
 ./tam
