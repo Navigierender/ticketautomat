@@ -1,0 +1,8 @@
+Kompilieren des tatsächlichen Programms:
+clang++ *.cpp -o tam -std=c++17 -Weverything -Wno-c++98-compat
+
+Ausführen des Hauptprogramms:
+./tam
+
+Kompilieren des Testprogramms:
+clang++ tester.cpp tester -std=c++17
