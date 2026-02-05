@@ -1,0 +1,12 @@
+Testdokumentation
+
+Um die mathematische Korrektheit zweier wichtiger Funktionen sicherzustellen,
+habe ich das Testprogramm tester.cpp erstellt.
+Dieses verifizierte während des gesamten Entwicklungsprozesses zwei wichtige Funktionen:
+- die Distanzberechnung getStationDistance innerhalb der Tram Utility
+- die Preisberechnung fetchRoutePrice des Orchestrators
+
+Ein Großteil der potenziellen Fehlerquellen (fehlende Dateien oder falsche Dateiformate etc.)
+wird durch das Modul errorHandler abgedeckt.
+Dieses protokolliert interne Fehler während der Laufzeit, was die Anzahl der für mich notwendigen
+Test Module klein gehalten hat.
