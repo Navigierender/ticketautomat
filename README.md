@@ -21,7 +21,7 @@ Provides input/output utility functions.
 - `IoUtil::valAboveOrZero(string msg, string wrng_msg, int goal)`: validates that an integer input is greater than or equal to a provided specified value
 
 ## moneyUtil
-Manages currency and change calculations.
+Manages change calculations.
 
 ### Functions
 - `MoneyUtil::changeOutPossible(int amount, change& reservoir)`: checks if change can be made for a given amount
