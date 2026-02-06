@@ -32,15 +32,12 @@ bool testGetStationDistance() {
     testTram.station_price = 10;
     testTram.tram_number = 1;
 
-    // Test case 1: A to C (distance 2)
     std::vector<std::string> stations1 = {"StationA", "StationC"};
     if (TramUtil::getStationDistance(&testTram, stations1) != 2) return false;
 
-    // Test case 2: C to A (distance 2)
     std::vector<std::string> stations2 = {"StationC", "StationA"};
     if (TramUtil::getStationDistance(&testTram, stations2) != 2) return false;
 
-    // Test case 3: B to B (distance 0)
     std::vector<std::string> stations3 = {"StationB", "StationB"};
     if (TramUtil::getStationDistance(&testTram, stations3) != 0) return false;
     
@@ -58,15 +55,14 @@ bool testFetchRoutePrice() {
     testTram.station_price = 5;
     testTram.tram_number = 10;
 
-    // Simulate a route
+    //simulate custom route
     route testRoute;
     testRoute.tram_ptr = &testTram;
-    testRoute.stations = {"S1", "S4"}; // Distance 3
+    testRoute.stations = {"S1", "S4"};
 
-    // Expected price: 3 * 5 = 15
     if (Orst::fetchRoutePrice(testRoute.tram_ptr, testRoute.stations) != 15) return false;
     
-    testRoute.stations = {"S5", "S2"}; // Distance 3
+    testRoute.stations = {"S5", "S2"};
     if (Orst::fetchRoutePrice(testRoute.tram_ptr, testRoute.stations) != 15) return false;
 
     return true;
@@ -78,6 +74,6 @@ int main() {
     runTest("TramUtil::getStationDistance", testGetStationDistance);
     runTest("Orst::fetchRoutePrice", testFetchRoutePrice);
 
-    std::cout << "All tests completed." << std::endl;
+    std::cout << "All tests completed!" << std::endl;
     return 0;
 }

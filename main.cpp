@@ -22,7 +22,6 @@ int main() {
     ErrLogger::initErrList(); 
     Orst::dependencyChecks();
     
-    // Moved from global scope to ensure ErrLogger::initErrList is called first
     const vector<tramLine> ALL_TRAMS = TramUtil::loadTrams();
     const vector<int> ALL_TRAMN_IDS = TramUtil::getTramINTs(&ALL_TRAMS);
     

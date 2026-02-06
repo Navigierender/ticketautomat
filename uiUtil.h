@@ -7,7 +7,7 @@
 using namespace std;
 
 /**
- * @brief Provides ANSI escape codes for text formatting and cursor manipulation.
+ * @brief Provides ANSI escape codes for text formatting and up,down cursor movement
  */
 struct format {
     /// @brief Resets all ANSI formatting.
@@ -47,8 +47,7 @@ struct format {
 
 namespace UiUtil {
     /**
-     * @brief Checks for necessary external dependencies.
-     *        If a dependency is missing, it logs a critical error and terminates the program.
+     * @brief Checks for necessary external dependencies. If a dependency is missing, it logs a critical error and terminates the program.
      */
     void dependencyCheck();
 

@@ -13,8 +13,7 @@ using namespace std;
 
 namespace Orst {
     /**
-     * @brief Performs initial dependency checks for the orchestrator, ensuring all required utilities are available.
-     *        If a dependency is missing, it logs a critical error and terminates the program.
+     * @brief Performs initial dependency checks for the orchestrator, ensuring all required utilities are available. If a dependency is missing, it logs a critical error and terminates the program.
      */
     void dependencyChecks();
 

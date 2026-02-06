@@ -32,7 +32,7 @@ namespace intern {
     bool handleChangeLogic(int change_due, change& reservoir, string msg_out, int width) {
         if (!MoneyUtil::changeOutPossible(change_due, reservoir)) {
             finishTransaction("Fehler", {"Wechselgeld nicht verfügbar.", "Bitte anderen Betrag wählen."}, width);
-            return false; // Transaction not finished, loop again
+            return false;
         }
 
         vector<string> display = {"Ticket wird ausgegeben...", ""};
@@ -44,7 +44,7 @@ namespace intern {
             display.push_back(c_str[i] + "x " + to_string(denoms[i]));
         }
         finishTransaction(msg_out, display, width);
-        return true; // Transaction finished
+        return true;
     }
 }
 

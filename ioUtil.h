@@ -8,8 +8,7 @@ using namespace std;
 
 namespace IoUtil {
     /**
-     * @brief Checks for necessary external dependencies
-     *        If a dependency is missing, it logs a critical error and terminates the program.
+     * @brief Checks for necessary external dependencies. If a dependency is missing, it logs a critical error and terminates the program.
     **/
     void dependencyCheck();
 

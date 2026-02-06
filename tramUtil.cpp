@@ -76,7 +76,6 @@ namespace TramUtil {
             }
         }
         ErrLogger::stopAndLog(105, true); 
-        return all_trams[0]; //for compiler warnings
     }
                     
     int getStationDistance(const tramLine* tram, vector<string> prov_stations) {

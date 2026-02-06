@@ -45,7 +45,7 @@ namespace IoUtil {
         while (true) {
             cout << msg << ": ";
             getline(cin, input);
-            //check: Is the string empty or non-numeric?
+            //string empty or non-numeric check
             bool numeric = !input.empty();
             for (char c : input) if (!isdigit(c)) numeric = false;
 

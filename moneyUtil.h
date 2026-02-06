@@ -7,23 +7,15 @@ using namespace std;
 
 /**
  * @brief Represents a reservoir of currency denominations.
- * @details The values represent the count of internal currency units:
- *          v17: 17 units, v11: 11 units, v7: 7 units, v5: 5 units, v3: 3 units, v2: 2 units, v1: 1 unit.
+ * @details The values represent the count of internal currency units: (v17: 17 units, v11: 11 units, v7: 7 units, v5: 5 units, v3: 3 units, v2: 2 units, v1: 1 unit)
  */
 struct change {
-    /// @brief Count of 17-unit denominations.
     int v17;
-    /// @brief Count of 11-unit denominations.
     int v11;
-    /// @brief Count of 7-unit denominations.
     int v7;
-    /// @brief Count of 5-unit denominations.
     int v5;
-    /// @brief Count of 3-unit denominations.
     int v3;
-    /// @brief Count of 2-unit denominations.
     int v2;
-    /// @brief Count of 1-unit denominations.
     int v1;
 };
 
