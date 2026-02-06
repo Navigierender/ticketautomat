@@ -75,7 +75,8 @@ namespace TramUtil {
                 return tram;
             }
         }
-        ErrLogger::stopAndLog(105, true); 
+        ErrLogger::stopAndLog(105, true);
+        return all_trams[0]; //for compiler warnings because "non-void does not return a value in all control paths"
     }
                     
     int getStationDistance(const tramLine* tram, vector<string> prov_stations) {
